@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:annotation-config />
+    <context:component-scan base-package="school.beanConfiguration"/>
+
+    <!--<bean name="pradeep" id="pradeep" class="school.modle.Person" autowire="byName">-->
+        <!--<property name="firstName" value="Pradeep Kumar"/>-->
+        <!--<property name="lastName" value="Nemmani"/>-->
+        <!--<property name="age" value="24"/>-->
+        <!--<property name="gender" value="male"/>-->
+
+    <!--</bean>-->
+
+
+    <!--<bean name="student" id="student" class="school.modle.Student" autowire="constructor">-->
+        <!--<constructor-arg name="id" value="1" ></constructor-arg>-->
+        <!--<constructor-arg name="section" value="10" ></constructor-arg>-->
+    <!--</bean>-->
+    <!--<bean name="address" id="pradeepAddress" class="school.modle.Address">-->
+    <!--<property name="country" value="India"></property>-->
+    <!--</bean>-->
+    <!--<bean name="pradeepAddress2" id="pradeepAddress2" class="school.modle.Address">-->
+
+    <!--</bean>-->
+    <bean id="aop" class="school.logging.Logging"/>
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <aop:config proxy-target-class="false">
+        <aop:aspect ref="aop">
+            <!--<aop:before method="logEntry" pointcut="execution(* school.service.SchoolService.createSchool(..))"></aop:before>-->
+        <aop:before method="logEntry" pointcut="execution(* *(..))"></aop:before>
+        <aop:around method="timeTaken" pointcut="execution(* *(..))"></aop:around>
+        </aop:aspect>
+
+    </aop:config>
+</beans>
